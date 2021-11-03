@@ -1,0 +1,36 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% include 'home/menu.html' %}
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'imagem/logo.png'%}" alt="" width="150px">
+        <h1>hello</h1>
+        <a href="{% url 'home' %}">Home</a>
+        <form action="{% url 'produto' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button class="btn btn-success" type="submit">Enviar</button>
+            {% endbuttons %}
+
+            {% for linhas in dados %}
+            <img src="{{linhas.foto.pequeno.url}}" alt=""><br>
+            <img src="{{linhas.foto.media.url}}" alt=""><br>
+            {% endfor %}
+        </form>
+        </form>
+    </div>
+</body>
+</html>
